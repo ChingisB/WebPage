@@ -1,0 +1,37 @@
+{% extends "base.html"%} {% block content %}
+<script>
+  function getURL(id) {
+    let c = window.location.href;
+    c = c.split("/");
+    c[4] = id;
+    let q = document.getElementById(id);
+    q.href = c.join("/");
+  }
+</script>
+<main role="main" class="container check">
+  {% for post in posts %}
+  <div class="card flex-md-row mb-4 box-shadow h-md-250">
+    <div class="card-body d-flex flex-column align-items-start">
+      <div>
+        <h3 class="mb-0 text-dark">{{post.title}}</h3>
+      </div>
+      <div class="mb-1 text-muted">{{post.created_date}}</div>
+      <p class="card-text mb-auto">{{post.desc}}</p>
+      <a href="/post/{{post.id}}">Continue reading</a>
+    </div>
+  </div>
+  {% endfor %}
+  <nav aria-label="Page navigation example">
+    <ul class="pagination">
+      {% for i in range(1, num_pages + 1) %}
+      <li class="page-item">
+        <a class="page-link" id="{{i}}">{{i}}</a>
+        <script>
+          getURL("{{i}}");
+        </script>
+        {% endfor %}
+      </li>
+    </ul>
+  </nav>
+</main>
+{% endblock %}

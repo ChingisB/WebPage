@@ -1,0 +1,31 @@
+{% extends "base.html" %} {% block content %}
+<main role="main" class="container check">
+  <h1>{{post.title}}</h1>
+  <p>{{post.desc}}</p>
+  <p>{{post.content}}</p>
+  <h3>Комментарии</h3>
+  <br />
+  {% for comment in comments %}
+  <div class="card">
+    <div class="card-header">Posted on {{comment.created_date}}</div>
+    <div class="card-body">
+      <h5 class="card-title">{{comment.user}}</h5>
+      <p class="card-text">{{comment.content}}</p>
+    </div>
+  </div>
+  <br />
+  {% endfor %}
+  <br />
+  <h1>Написать комментарий</h1>
+  <form action="" method="post" novalidate>
+    {{form.hidden_tag()}}
+    <div class="form-group">
+      {{ form.content(class="form-control", id="inputText", placeholder="Текст поста") }} <br />
+      {% for error in form.content.errors %}
+      <div class="alert alert-danger" role="alert">{{ error }}</div>
+      {% endfor%}
+    </div>
+    {{ form.submit(type="submit", class="btn btn-lg btn-primary btn-block") }}
+  </form>
+</main>
+{% endblock %}

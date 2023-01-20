@@ -1,0 +1,65 @@
+.login {
+  width: 15%;
+  margin-left: auto;
+  margin-right: auto;
+  padding-top: 200px;
+}
+
+.btn:not(:disabled):not(.disabled) {
+  cursor: pointer;
+}
+.btn-block {
+  display: block;
+  width: 100%;
+}
+.btn-group-lg > .btn,
+.btn-lg {
+  padding: 0.5rem 1rem;
+  font-size: 1.25rem;
+  line-height: 1.5;
+  border-radius: 0.3rem;
+}
+.btn-primary {
+  color: #fff;
+  background-color: #007bff;
+  border-color: #007bff;
+}
+
+.btn {
+  font-weight: 400;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: middle;
+  user-select: none;
+  border: 1px solid transparent;
+  transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out,
+    border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+.container {
+  padding-top: 150px;
+}
+
+.post {
+  padding-top: 100px;
+}
+
+label {
+  color: #666;
+}
+
+.check {
+  padding-top: 250px;
+}
+
+main {
+  width: 75%;
+}
+
+.large-font {
+  font-size: xxx-large;
+}
+.top-20 {
+  position: relative;
+  top: 20vh;
+}
