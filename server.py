@@ -25,13 +25,16 @@ def load_user(user_id):
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     form = LoginForm()
+    login_error = "None"
     if form.validate_on_submit():
         user = verify(form.username.data, form.password.data)
         if user:
             user.is_authenticated = True
             login_user(user, force=True)
             return redirect('/main/1')
-    return render_template('login.html', title='Авторизация', form=form)
+        else:
+            login_error = 'Неверный логин или пароль'
+    return render_template('login.html', title='Авторизация', form=form, login_error=login_error)
 
 
 @app.route('/register', methods=["GET", "POST"])
@@ -91,6 +94,7 @@ def show_post(post_id: int):
                                 post=post, form=form, comments=get_post_comments(post_id))
     return render_template('post_view.html',
                             title="Post", post=post, form=form, comments=get_post_comments(post_id))
+
 
 def main():
     app.run()

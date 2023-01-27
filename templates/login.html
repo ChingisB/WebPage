@@ -24,7 +24,9 @@
       type="password", placeholder="Пароль") }} <br />
       {% for error in form.password.errors %}
       <div class="alert alert-danger" role="alert">{{ error }}</div>
-      {% endfor%} {{ form.submit(type="submit", class="btn btn-lg btn-primary
+      {% endfor%} {% if login_error != None %}
+      <div class="alert alert-danger" role="alert">{{login_error}}</div>
+      {% endif %}{{ form.submit(type="submit", class="btn btn-lg btn-primary
       btn-block") }}
     </form>
     <a href="/register">Создать аккаунт</a>
