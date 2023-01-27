@@ -20,7 +20,8 @@
   <form action="" method="post" novalidate>
     {{form.hidden_tag()}}
     <div class="form-group">
-      {{ form.content(class="form-control", id="inputText", placeholder="Текст поста") }} <br />
+      {{ form.content(class="form-control", id="inputText", placeholder="Текст
+      поста") }} <br />
       {% for error in form.content.errors %}
       <div class="alert alert-danger" role="alert">{{ error }}</div>
       {% endfor%}

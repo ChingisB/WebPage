@@ -25,7 +25,7 @@ def load_user(user_id):
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     form = LoginForm()
-    login_error = "None"
+    login_error = None
     if form.validate_on_submit():
         user = verify(form.username.data, form.password.data)
         if user:
@@ -34,7 +34,7 @@ def login():
             return redirect('/main/1')
         else:
             login_error = 'Неверный логин или пароль'
-    return render_template('login.html', title='Авторизация', form=form, login_error=login_error)
+    return render_template('login.html', title='Вход', form=form, login_error=login_error)
 
 
 @app.route('/register', methods=["GET", "POST"])
@@ -70,7 +70,7 @@ def logout():
 @login_required
 def main_page(page):
     return render_template('index.html', posts=get_posts(page),
-                            title='main', num_pages=get_num_pages())
+                            title='Главная', num_pages=get_num_pages())
 
 
 @app.route('/write_post', methods=["GET", "POST"])
@@ -93,7 +93,13 @@ def show_post(post_id: int):
         return render_template('post_view.html', title="Post",
                                 post=post, form=form, comments=get_post_comments(post_id))
     return render_template('post_view.html',
-                            title="Post", post=post, form=form, comments=get_post_comments(post_id))
+                            title="Пост", post=post, form=form, comments=get_post_comments(post_id))
+
+
+@app.route("/<username>/<int:page>")
+def show_author_post(username, page):
+    return render_template('user.html', posts=get_posts(page, username),
+                            title='Главная', num_pages=get_num_pages(username))
 
 
 def main():

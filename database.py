@@ -62,8 +62,11 @@ def post_to_dict(post: Post) -> dict:
     return new_post
 
 
-def get_posts(page: int):
-    posts = sess.query(Post).order_by(Post.created_date.desc())
+def get_posts(page: int, login: str=None):
+    posts = sess.query(Post)
+    if login:
+        posts = posts.filter(Post.user == get_user_by_login(login))
+    posts = posts.order_by(Post.created_date.desc())
     posts = posts.limit(10)
     posts = posts.offset((page - 1) * 10)
     posts = posts.all()
@@ -78,8 +81,15 @@ def get_post_by_id(post_id: int) -> Post:
     return post
 
 
-def get_num_pages():
-    num_posts = sess.query(Post).count()
+def get_user_by_login(login: str) -> User:
+    return sess.query(User).filter(User.login == login).first()
+
+
+def get_num_pages(login: str=None):
+    num_posts = sess.query(Post)
+    if login:
+        num_posts = num_posts.filter(Post.user == get_user_by_login(login))
+    num_posts = num_posts.count()
     return num_posts // 10 + bool(num_posts % 10)
 
 
