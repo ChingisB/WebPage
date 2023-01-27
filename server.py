@@ -99,7 +99,7 @@ def show_post(post_id: int):
 @app.route("/<username>/<int:page>")
 def show_author_post(username, page):
     return render_template('user.html', posts=get_posts(page, username),
-                            title='Главная', num_pages=get_num_pages(username))
+                            title='Посты от автора', num_pages=get_num_pages(username))
 
 
 def main():
